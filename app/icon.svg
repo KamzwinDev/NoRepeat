@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <linearGradient id="contour" gradientUnits="userSpaceOnUse" x1="5" y1="0" x2="59" y2="0">
+      <stop offset="0" stop-color="#9f00ff"/>
+      <stop offset="0.35" stop-color="#9f00ff"/>
+      <stop offset="0.65" stop-color="#00e5ff"/>
+      <stop offset="1" stop-color="#00e5ff"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="14" fill="#0a0816"/>
+  <rect x="5" y="5" width="54" height="54" rx="12" fill="none" stroke="url(#contour)" stroke-width="1.6"/>
+  <!-- N : pièce gauche -->
+  <path fill="#9f00ff" d="M14 21Q14 15.2 19 15.2H24.9Q26.5 15.2 27.6 16.4L35.2 24.4L28.7 30.9L24.5 26.7Q23.4 25.9 23.4 27.3V36.3L14.4 44.8Q14 45 14 44Z"/>
+  <!-- N : pièce droite -->
+  <path fill="#9f00ff" d="M49.1 21.3Q50.2 22 50.2 23.6V44.5Q50.2 49.5 43.5 49.5H43Q41.9 49.5 41.2 48.8L31.2 38.9Z"/>
+  <!-- Slash cyan -->
+  <path fill="#00e5ff" d="M12.7 49.5L47 16.2Q47.8 15.6 48.8 15.6H51.4L17.6 48.8Q16.9 49.5 15.8 49.5Z"/>
+</svg>

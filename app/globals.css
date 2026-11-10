@@ -1,26 +1,195 @@
+/* app/globals.css */
 @import "tailwindcss";
 
+/* Thème sombre néon : TOUTES les couleurs de l'appli sont définies ici. */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Fonds : profonds, pour que le néon ressorte */
+  --fond: #0a0816;
+  --fond-carte: #120f24;
+  --fond-survol: #1b1735;
+  --bordure: #2a2450;
+  --bordure-cyan: #0b5a66;     /* bordure discrète teintée cyan */
+
+  /* Textes */
+  --texte: #f1effc;
+  --texte-doux: #a9a6c9;
+
+  /* Accent principal : violet néon */
+  --accent: #a100ff;
+  --accent-survol: #8c00e0;
+  --accent-actif: #7200b8;
+  --accent-clair: #c266ff;
+
+  /* Accent secondaire : cyan néon (de plus en plus présent) */
+  --cyan: #00f0ff;
+  --cyan-survol: #00cfe0;
+  --cyan-clair: #5cf4ff;
+  --sur-cyan: #04121a;
+
+  /* Danger (suppression, erreurs, bugs) */
+  --danger: #ff3355;
+  --danger-survol: #e61f42;
+
+  /* Halos lumineux (glow) */
+  --lueur-accent: 0 0 18px rgb(161 0 255 / 0.55);
+  --lueur-accent-forte: 0 0 28px rgb(161 0 255 / 0.75);
+  --lueur-cyan: 0 0 16px rgb(0 240 255 / 0.5);
+  --lueur-cyan-forte: 0 0 26px rgb(0 240 255 / 0.7);
+  --lueur-danger: 0 0 16px rgb(255 51 85 / 0.5);
+
+  color-scheme: dark;
 }
 
+/* Expose ces variables à Tailwind : bg-cyan, text-cyan-clair, shadow-lueur-cyan... */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-fond: var(--fond);
+  --color-carte: var(--fond-carte);
+  --color-survol: var(--fond-survol);
+  --color-bordure: var(--bordure);
+  --color-bordure-cyan: var(--bordure-cyan);
+  --color-texte: var(--texte);
+  --color-doux: var(--texte-doux);
+  --color-accent: var(--accent);
+  --color-accent-survol: var(--accent-survol);
+  --color-accent-actif: var(--accent-actif);
+  --color-accent-clair: var(--accent-clair);
+  --color-cyan: var(--cyan);
+  --color-cyan-survol: var(--cyan-survol);
+  --color-cyan-clair: var(--cyan-clair);
+  --color-sur-cyan: var(--sur-cyan);
+  --color-danger: var(--danger);
+  --color-danger-survol: var(--danger-survol);
+
+  --shadow-lueur-accent: var(--lueur-accent);
+  --shadow-lueur-accent-forte: var(--lueur-accent-forte);
+  --shadow-lueur-cyan: var(--lueur-cyan);
+  --shadow-lueur-cyan-forte: var(--lueur-cyan-forte);
+  --shadow-lueur-danger: var(--lueur-danger);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  html,
+  body {
+    min-height: 100%;
+    background: var(--fond);
+    color: var(--texte);
+    font-family: var(--font-geist-sans), system-ui, -apple-system, "Segoe UI",
+      Roboto, Arial, sans-serif;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Liens : violet clair */
+  a {
+    color: var(--accent-clair);
+    text-decoration: none;
+  }
+
+  input,
+  textarea {
+    background: var(--fond-carte);
+    border: 1px solid var(--bordure);
+    border-radius: 6px;
+    font: inherit;
+    color: var(--texte);
+    caret-color: var(--cyan);            /* curseur de saisie cyan */
+    transition: box-shadow 0.15s, border-color 0.15s;
+  }
+
+  input::placeholder,
+  textarea::placeholder {
+    color: var(--texte-doux);
+  }
+
+  /* Focus : bordure cyan + halo cyan (le violet reste pour les boutons) */
+  input:focus,
+  textarea:focus {
+    outline: none;
+    border-color: var(--cyan);
+    box-shadow: var(--lueur-cyan);
+  }
+
+  button {
+    font: inherit;
+  }
+
+  /* Sélection de texte : fond cyan, texte sombre */
+  ::selection {
+    background: var(--cyan);
+    color: var(--sur-cyan);
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--fond);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--bordure);
+    border-radius: 5px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--cyan);
+  }
+}
+/* ---------- Fond animé (voir app/FondAnime.tsx) ---------- */
+
+.fond-blob {
+  filter: blur(110px);
+  will-change: transform, opacity;
+}
+
+.fond-blob-violet {
+  background: #9f00ff;
+  opacity: 0.18;
+  animation: derive-violet 13s ease-in-out infinite;
+}
+
+.fond-blob-cyan {
+  background: #00e5ff;
+  opacity: 0.15;
+  animation: derive-cyan 11s ease-in-out infinite;
+}
+
+/* Cycles de durées différentes (13 s et 11 s) : les deux blobs restent désynchronisés. */
+@keyframes derive-violet {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.1;
+  }
+  50% {
+    transform: translate(70px, 50px) scale(1.12);
+    opacity: 0.2;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@keyframes derive-cyan {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.2;
+  }
+  50% {
+    transform: translate(-60px, -45px) scale(1.1);
+    opacity: 0.1;
+  }
+}
+
+/* Mouvement réduit : fond statique, opacité fixe. */
+@media (prefers-reduced-motion: reduce) {
+  .fond-blob-violet,
+  .fond-blob-cyan {
+    animation: none;
+  }
+  .fond-blob-violet {
+    opacity: 0.15;
+  }
+  .fond-blob-cyan {
+    opacity: 0.12;
+  }
 }
