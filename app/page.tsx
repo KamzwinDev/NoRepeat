@@ -203,12 +203,32 @@ export default function PageAccueil() {
   return (
     <main className="mx-auto w-full max-w-2xl px-4 py-12 sm:py-16">
       {/* En-tête : logo + nom + tagline */}
-      <header className="mb-10">
-        <div className="mb-3 flex items-center gap-3">
-          <Logo />
-          <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">
-            NoRepeat
-          </h1>
+            <header className="mb-10">
+        <div className="mb-3 flex items-center justify-between gap-3">
+          <div className="flex items-center gap-3">
+            <Logo />
+            <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">
+              NoRepeat
+            </h1>
+          </div>
+          <Link
+            href="/extension"
+            className="inline-flex shrink-0 items-center gap-2 rounded-lg border border-bordure bg-carte px-3.5 py-2 text-sm font-medium text-texte transition duration-150 hover:border-cyan hover:bg-survol hover:text-cyan-clair active:scale-95"
+          >
+            <svg
+              viewBox="0 0 24 24"
+              className="h-4 w-4"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M10 3h4v3a2 2 0 1 0 4 0V3h3v6h-3a2 2 0 1 0 0 4h3v8h-6v-3a2 2 0 1 0-4 0v3H3v-8h3a2 2 0 1 0 0-4H3V3h7Z" />
+            </svg>
+            Extension
+          </Link>
         </div>
         <p className="text-lg text-cyan-clair">
           Ne réexplique plus jamais ton projet à ton IA
